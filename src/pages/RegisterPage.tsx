@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { TreePine, Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { TreePine, Mail, Lock, User, Eye, EyeOff, Chrome } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -23,7 +23,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { signUp } = useAuth();
+  const { signUp, signInWithGoogle } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -46,12 +46,24 @@ export default function RegisterPage() {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+    try {
+      await signInWithGoogle();
+      navigate('/dashboard');
+    } catch (error) {
+      // Error is handled in the signInWithGoogle function
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-beige to-light-blue flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="flex justify-center">
-            <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-paynes-gray rounded-full flex items-center justify-center">
               <TreePine className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -170,7 +182,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="btn-primary w-full py-3 flex items-center justify-center"
+              className="btn bg-paynes-gray text-white hover:bg-paynes-gray/90 w-full py-3 flex items-center justify-center"
             >
               {isLoading ? (
                 <LoadingSpinner size="sm" />
@@ -186,6 +198,35 @@ export default function RegisterPage() {
                 <div className="w-full border-t border-gray-300" />
               </div>
               <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">OR</span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                disabled={isLoading}
+                className="btn border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 w-full py-3 flex items-center justify-center"
+              >
+                {isLoading ? (
+                  <LoadingSpinner size="sm" />
+                ) : (
+                  <>
+                    <Chrome className="w-5 h-5 mr-2" />
+                    Sign up with Google
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">Already have an account?</span>
               </div>
             </div>
@@ -193,7 +234,7 @@ export default function RegisterPage() {
             <div className="mt-6">
               <Link
                 to="/login"
-                className="btn-outline w-full py-3 text-center"
+                className="btn border border-paynes-gray text-paynes-gray hover:bg-paynes-gray/10 w-full py-3 text-center"
               >
                 Sign in instead
               </Link>
