@@ -31,7 +31,7 @@ export default function AdminDashboard() {
         {/* Admin Header */}
         <div className="mb-8">
           <div className="flex items-center space-x-3">
-            <Shield className="w-8 h-8 text-primary-600" />
+            <Shield className="w-8 h-8 text-paynes-gray" />
             <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
           </div>
           <p className="mt-2 text-gray-600">
@@ -43,8 +43,8 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <Users className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-light-blue rounded-lg flex items-center justify-center">
+                <Users className="w-6 h-6 text-paynes-gray" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Users</p>
@@ -55,8 +55,8 @@ export default function AdminDashboard() {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <TreePine className="w-6 h-6 text-green-600" />
+              <div className="w-12 h-12 bg-light-blue rounded-lg flex items-center justify-center">
+                <TreePine className="w-6 h-6 text-cadet-gray" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Trees</p>
@@ -67,8 +67,8 @@ export default function AdminDashboard() {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Activity className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center">
+                <Activity className="w-6 h-6 text-paynes-gray" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active Users</p>
@@ -79,8 +79,8 @@ export default function AdminDashboard() {
 
           <div className="card p-6">
             <div className="flex items-center">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                <Shield className="w-6 h-6 text-red-600" />
+              <div className="w-12 h-12 bg-bittersweet/20 rounded-lg flex items-center justify-center">
+                <Shield className="w-6 h-6 text-bittersweet" />
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Blocked Trees</p>
@@ -108,7 +108,7 @@ export default function AdminDashboard() {
                     <p className="text-sm font-medium text-gray-900">
                       {user.treesCount} {user.treesCount === 1 ? 'tree' : 'trees'}
                     </p>
-                    <button className="text-xs text-primary-600 hover:text-primary-700">
+                    <button className="text-xs text-paynes-gray hover:text-cadet-gray">
                       View Details
                     </button>
                   </div>
@@ -127,7 +127,7 @@ export default function AdminDashboard() {
                     <div className="flex items-center space-x-2">
                       <p className="font-medium text-gray-900">{tree.name}</p>
                       {tree.isBlocked && (
-                        <span className="px-2 py-1 text-xs bg-red-100 text-red-800 rounded-full">
+                        <span className="px-2 py-1 text-xs bg-bittersweet/20 text-bittersweet rounded-full">
                           Blocked
                         </span>
                       )}
@@ -142,10 +142,10 @@ export default function AdminDashboard() {
                       {tree.members} members
                     </p>
                     <div className="flex space-x-2 mt-1">
-                      <button className="text-xs text-primary-600 hover:text-primary-700">
+                      <button className="text-xs text-paynes-gray hover:text-cadet-gray">
                         View
                       </button>
-                      <button className="text-xs text-red-600 hover:text-red-700">
+                      <button className="text-xs text-bittersweet hover:text-bittersweet/90">
                         {tree.isBlocked ? 'Unblock' : 'Block'}
                       </button>
                     </div>
@@ -166,7 +166,7 @@ export default function AdminDashboard() {
                 placeholder="Search users by email..."
                 className="input flex-1"
               />
-              <button className="btn-primary">Search</button>
+              <button className="btn bg-paynes-gray text-white hover:bg-paynes-gray/90">Search</button>
             </div>
             <div className="text-center py-8 text-gray-500">
               User search and management interface will be implemented here.

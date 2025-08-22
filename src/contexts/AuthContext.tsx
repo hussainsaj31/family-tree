@@ -6,7 +6,9 @@ import {
   sendPasswordResetEmail,
   onAuthStateChanged,
   updateProfile,
-  User as FirebaseUser
+  User as FirebaseUser,
+  GoogleAuthProvider,
+  signInWithPopup
 } from 'firebase/auth';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../lib/firebase';
@@ -142,6 +144,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      toast.success('Successfully signed in with Google!');
+    } catch (error: any) {
+      console.error('Google sign in error:', error);
+      toast.error(error.message || 'Failed to sign in with Google');
+      throw error;
+    }
+  };
+
   const value: AuthContextType = {
     user,
     loading,
@@ -150,6 +164,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signUp,
     signOut,
     resetPassword,
+    signInWithGoogle,
   };
 
   return (

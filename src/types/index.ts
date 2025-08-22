@@ -32,8 +32,14 @@ export interface FamilyTree {
   members: FamilyMember[];
   sharedWith: TreeAccess[];
   isBlocked: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
+  updatedAt: {
+    seconds: number;
+    nanoseconds: number;
+  };
 }
 
 export interface TreeAccess {
@@ -63,8 +69,16 @@ export interface AuthContextType {
   user: User | null;
   loading: boolean;
   isAdmin: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (email:string, password: string) => Promise<void>;
   signUp: (email: string, password: string, displayName: string) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
+}
+
+export interface TreeContextType {
+  trees: FamilyTree[];
+  selectedTree: FamilyTree | null;
+  createTree: (data: { name: string; description?: string }) => Promise<void>;
+  getTreeById: (id: string) => Promise<void>;
 }
